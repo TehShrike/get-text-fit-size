@@ -53,8 +53,12 @@ test(`More words`, t => {
 	t.fitsUnder(output, 21.78999)
 }, 'font: normal normal normal normal 16px / normal Times;')
 
-
 test(`With bold`, t => {
 	const output = getTextFitSize(document.getElementById('container'), 'This is some text yo')
 	t.fitsUnder(output, 60.01)
 }, 'font: normal normal bold normal 16px / normal Times;')
+
+test(`Starting with text that won't fit in at the default style`, t => {
+	const output = getTextFitSize(document.getElementById('container'), 'This is some text yo')
+	t.fitsUnder(output, 60.01)
+}, 'font: normal normal bold normal 90px / normal Times;')
