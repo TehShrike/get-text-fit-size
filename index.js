@@ -1,12 +1,13 @@
-const pxRegex = /\d+px/
+const pxRegex = () => /\d+px/
 
-const getPx = str => parseInt(pxRegex.exec(str)[0], 10)
-const fontAtSize = (font, size) => font.replace(pxRegex, () => size + 'px')
+const getPx = str => parseInt(pxRegex().exec(str)[0], 10)
+const fontAtSize = (font, size) => font.replace(pxRegex(), () => size + 'px')
+const join = (...args) => args.join(' ')
 
 module.exports = function getTextFitSize(containerElement, text) {
 	const canvasContext = createCanvas()
 	const containerComputedStyles = window.getComputedStyle(containerElement)
-	const font = containerComputedStyles.getPropertyValue('font')
+	const font = getFontString(containerComputedStyles)
 	const targetWidth = getPx(containerComputedStyles.getPropertyValue('width'))
 
 	return calculateFitSize(canvasContext, font, text, targetWidth)
@@ -49,3 +50,17 @@ function getNewFontSizeUsingRatio(targetWidth, currentWidth, currentFontSize) {
 	const ratio = targetWidth / currentWidth
 	return currentFontSize * ratio
 }
+
+function getFontString(computedStyles) {
+	const v = p => computedStyles.getPropertyValue(p)
+
+	return v('font')
+		|| join(v('font-style'),
+			v('font-variant'),
+			v('font-weight'),
+			v('font-stretch'),
+			v('font-size'),
+			// v('line-height'), line heights confuse Firefox I guess?
+			v('font-family'))
+}
+

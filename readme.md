@@ -8,6 +8,8 @@ The width and font styles of the container element will be used for the calculat
 
 There may be some weirdnesses with bold fonts on Safari.  Open an issue or PR if you know anything.
 
+Works in all modern browsers except IE or Edge.
+
 # License
 
 [WTFPL](http://wtfpl2.com)
