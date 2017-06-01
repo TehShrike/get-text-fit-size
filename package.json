@@ -4,7 +4,10 @@
   "description": "Find out what font size will make a text block fit inside of another element without wrapping",
   "main": "index.js",
   "scripts": {
-    "test": "tape test.js | tape-run"
+    "test": "browserify test.js | tape-run",
+    "test:safari": "npm t -- --browser=safari",
+    "test:chrome": "npm t -- --browser=chrome",
+    "test:firefox": "npm t -- --browser=firefox"
   },
   "repository": {
     "type": "git",
@@ -22,5 +25,11 @@
   "bugs": {
     "url": "https://github.com/TehShrike/get-text-fit-size/issues"
   },
-  "homepage": "https://github.com/TehShrike/get-text-fit-size#readme"
+  "homepage": "https://github.com/TehShrike/get-text-fit-size#readme",
+  "devDependencies": {
+    "browserify": "14.4.0",
+    "tape": "4.6.3",
+    "tape-catch": "1.0.6",
+    "tape-run": "3.0.0"
+  }
 }
