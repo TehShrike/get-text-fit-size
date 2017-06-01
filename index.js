@@ -36,8 +36,6 @@ function calculateFitSize(context, initialFont, text, targetWidth) {
 
 	let size = getNewFontSizeUsingRatio(targetWidth, currentWidth, currentFontSize)
 
-	console.log('size', size, 'makes for width', getWidthAt(fontAtSize(initialFont, size)), 'trying to fit into', targetWidth)
-
 	const tooHigh = size => getWidthAt(fontAtSize(initialFont, size)) > targetWidth
 
 	while (tooHigh(size)) {
