@@ -1,6 +1,6 @@
 {
   "name": "get-text-fit-size",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Find out what font size will make a text block fit inside of another element without wrapping",
   "main": "index.js",
   "scripts": {
