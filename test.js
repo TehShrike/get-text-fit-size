@@ -12,11 +12,11 @@ const clearBrowser = style => {
 			</div>
 			<style>
 				#container {
-					${style}
 					margin-left: auto;
 					margin-right: auto;
 					width: 500px;
 					padding: 15px;
+					${style}
 				}
 			</style>
 		</body>
@@ -62,3 +62,10 @@ test(`Starting with text that won't fit in at the default style`, t => {
 	const output = getTextFitSize(document.getElementById('container'), 'This is some text yo')
 	t.fitsUnder(output, 60.01)
 }, 'font: normal normal bold normal 90px / normal Times;')
+
+// add for issue #2
+test(`Basic test with width:auto;`, t => {
+	const output = getTextFitSize(document.getElementById('container'), 'This is some text yo')
+	t.fitsUnder(output, 62.08)
+}, 'font: normal normal normal normal 16px / normal Times; width: auto;')
+
