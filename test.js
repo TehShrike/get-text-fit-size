@@ -26,11 +26,13 @@ const clearBrowser = style => {
 }
 
 const test = (description, fn, style) => {
+	const variance = 0.5
 	tape(description, t => {
 		clearBrowser(style)
 		const harness = {
 			fitsUnder(actual, target) {
-				t.ok(actual < target && actual > target - 0.5, `${actual} less than ${target} and greater than ${target - 0.5}`)
+				t.ok(actual < target, `${actual} should be less than ${target}`)
+				t.ok(actual > target - variance, `${actual} should be greater than ${target - variance}`)
 			}
 		}
 		fn(harness)
