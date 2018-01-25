@@ -71,6 +71,6 @@ test(`Basic test with width:auto;`, t => {
 	const output = getTextFitSize(document.getElementById('child'), 'This is some text yo')
 	t.fitsUnder(output, 62.08)
 }, 'font: normal normal normal normal 16px / normal Times;', `
-<div id="child" style="width: auto;"></div>
+<div id="child" style="display:inline; width: auto;"></div>
 `)
 
