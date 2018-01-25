@@ -1,7 +1,7 @@
 const tape = require('tape-catch')
 const getTextFitSize = require('./')
 
-const clearBrowser = style => {
+const clearBrowser = (style, contents = '') => {
 	document.write(`
 	<html>
 		<head>
@@ -9,14 +9,15 @@ const clearBrowser = style => {
 		</head>
 		<body>
 			<div id="container">
+				${contents}
 			</div>
 			<style>
 				#container {
-					${style}
 					margin-left: auto;
 					margin-right: auto;
 					width: 500px;
 					padding: 15px;
+					${style}
 				}
 			</style>
 		</body>
@@ -25,10 +26,10 @@ const clearBrowser = style => {
 	document.close()
 }
 
-const test = (description, fn, style) => {
+const test = (description, fn, style, contents = '') => {
 	const variance = 0.5
 	tape(description, t => {
-		clearBrowser(style)
+		clearBrowser(style, contents)
 		const harness = {
 			fitsUnder(actual, target) {
 				t.ok(actual < target, `${actual} should be less than ${target}`)
@@ -64,3 +65,12 @@ test(`Starting with text that won't fit in at the default style`, t => {
 	const output = getTextFitSize(document.getElementById('container'), 'This is some text yo')
 	t.fitsUnder(output, 60.01)
 }, 'font: normal normal bold normal 90px / normal Times;')
+
+// add for issue #2
+test(`Basic test with width:auto;`, t => {
+	const output = getTextFitSize(document.getElementById('child'), 'This is some text yo')
+	t.fitsUnder(output, 62.08)
+}, 'font: normal normal normal normal 16px / normal Times;', `
+<div id="child" style="display:inline; width: auto;"></div>
+`)
+
